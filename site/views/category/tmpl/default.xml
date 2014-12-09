@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="COM_ALBOPRETORIO_CATEGORY_VIEW_DEFAULT_TITLE" option="COM_ALBOPRETORIO_CATEGORY_VIEW_DEFAULT_OPTION">
+		<help
+			key="JHELP_MENUS_MENU_ITEM_ALBOPRETORIO_CATEGORY"
+		/>
+		<message>
+			<![CDATA[COM_ALBOPRETORIO_CATEGORY_VIEW_DEFAULT_DESC]]>
+		</message>
+	</layout>
+
+	<!-- Add fields to the request variables for the layout. -->
+	<fields name="request">
+		<fieldset name="request">
+
+			<field name="id" type="category"
+				default="0"
+				description="COM_ALBOPRETORIO_FIELD_SELECT_CATEGORY_DESC"
+				extension="com_albopretorio"
+				label="COM_ALBOPRETORIO_FIELD_SELECT_CATEGORY_LABEL"
+				required="true"
+			/>
+		</fieldset>
+	</fields>
+
+	<!-- Add fields to the parameters object for the layout. -->
+<fields name="params">
+<fieldset name="basic" label="JGLOBAL_CATEGORY_OPTIONS">
+			<field name="spacer1" type="spacer" class="text"
+					label="JGLOBAL_SUBSLIDER_DRILL_CATEGORIES_LABEL"
+			/>
+
+			<field name="show_category_title" type="list"
+				label="JGLOBAL_SHOW_CATEGORY_TITLE"
+				description="JGLOBAL_SHOW_CATEGORY_TITLE_DESC"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="show_description" type="list"
+				description="JGLOBAL_SHOW_CATEGORY_DESCRIPTION_DESC"
+				label="JGLOBAL_SHOW_CATEGORY_DESCRIPTION_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="show_description_image" type="list"
+				description="JGLOBAL_SHOW_CATEGORY_IMAGE_DESC"
+				label="JGLOBAL_SHOW_CATEGORY_IMAGE_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+	</fieldset>
+
+</fields>
+</metadata>

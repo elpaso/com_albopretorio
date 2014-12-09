@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset addfieldpath="/administrator/components/com_categories/models/fields" >
+		<field name="id" type="text" default="0"
+			readonly="true" class="readonly" label="JGLOBAL_FIELD_ID_LABEL"
+			description="JGLOBAL_FIELD_ID_DESC" />
+
+
+        <field name="itopen" type="note" label="COM_ALBOPRETORIO_NOTE" description="COM_ALBOPRETORIO_NOTE_DESC" class="alert alert-info" close="true" />
+
+		<field name="name" type="text" label="COM_ALBOPRETORIO_FIELD_NAME_LABEL"
+			description="COM_ALBOPRETORIO_FIELD_NAME_DESC"
+			class="input-xxlarge input-large-text"
+			size="40"
+			required="true" />
+
+		<field name="alias" type="text" label="JFIELD_ALIAS_LABEL"
+			description="JFIELD_ALIAS_DESC"
+			hint="JFIELD_ALIAS_PLACEHOLDER"
+			size="45" />
+
+		<field name="published" type="list"
+			label="JSTATUS" description="JFIELD_PUBLISHED_DESC"
+			class="chzn-color-state" size="1" default="1"
+		>
+			<option value="1">
+				JPUBLISHED</option>
+			<option value="0">
+				JUNPUBLISHED</option>
+			<option value="2">
+				JARCHIVED</option>
+			<option value="-2">
+				JTRASHED</option>
+		</field>
+
+		<field name="catid" type="categoryedit" extension="com_albopretorio"
+			label="JCATEGORY" description="COM_ALBOPRETORIO_FIELD_CATEGORY_DESC"
+			required="true"
+		>
+		</field>
+
+		<field name="language" type="contentlanguage" label="JFIELD_LANGUAGE_LABEL"
+			description="COM_ALBOPRETORIO_FIELD_LANGUAGE_DESC"
+		>
+			<option value="*">JALL</option>
+		</field>
+
+		<field name="tags"
+			type="tag"
+			label="JTAG"
+			description="JTAG_DESC"
+			class="span12"
+			multiple="true"
+		>
+		</field>
+
+
+		<field name="description" type="editor" buttons="true" hide="pagebreak,readmore"
+			filter="JComponentHelper::filterText"
+			label="JGLOBAL_DESCRIPTION" description="COM_ALBOPRETORIO_FIELD_DESCRIPTION_DESC" />
+
+		<field name="ordering" type="ordering" content_type="com_albopretorio.affissione"
+			label="JFIELD_ORDERING_LABEL" description="JFIELD_ORDERING_DESC" />
+
+    </fieldset>
+
+    <fieldset name="options" label="COM_ALBOPRETORIO_FIELDSET_OPTIONS">
+		<field name="created" type="calendar"
+			label="JGLOBAL_FIELD_CREATED_LABEL" description="JGLOBAL_FIELD_CREATED_DESC"
+			size="22" format="%Y-%m-%d %H:%M:%S"
+			filter="user_utc" />
+
+		<field name="created_by" type="user"
+			label="JGLOBAL_FIELD_Created_by_Label" description="JGLOBAL_FIELD_CREATED_BY_DESC" />
+
+		<field name="created_by_alias" type="text"
+			label="JGLOBAL_FIELD_Created_by_alias_Label" description="JGLOBAL_FIELD_CREATED_BY_ALIAS_DESC"
+			size="20" />
+
+		<field name="modified" type="calendar" class="readonly"
+			label="JGLOBAL_FIELD_Modified_Label" description="COM_ALBOPRETORIO_FIELD_MODIFIED_DESC"
+			size="22" readonly="true" format="%Y-%m-%d %H:%M:%S" filter="user_utc" />
+
+		<field name="modified_by" type="user" label="JGLOBAL_FIELD_MODIFIED_BY_LABEL"
+			class="readonly" readonly="true" filter="unset"  />
+
+		<field name="checked_out" type="Text"
+			size="6" label="JGLOBAL_FIELD_CHECKEDOUT_LABEL"
+			description="JGLOBAL_FIELD_CHECKEDOUT_DESC" readonly="true"
+			filter="unset" />
+
+		<field name="checked_out_time" type="Text"
+			size="6" label="JGLOBAL_FIELD_CHECKEDOUT_TIME_LABEL"
+			description="JGLOBAL_FIELD_CHECKEDOUT_TIME_DESC"
+			readonly="true" filter="unset" />
+
+        <field name="access" type="accesslevel" label="JFIELD_ACCESS_LABEL"
+			description="JFIELD_ACCESS_DESC" size="1" />
+
+		<field name="metakey" type="textarea"
+			label="JFIELD_META_KEYWORDS_LABEL" description="JFIELD_META_KEYWORDS_DESC"
+			rows="3" cols="30" />
+
+		<field name="metadesc" type="textarea"
+			label="JFIELD_META_DESCRIPTION_LABEL" description="JFIELD_META_DESCRIPTION_DESC"
+			rows="3" cols="30" />
+
+		<field name="xreference" type="text"
+			label="JFIELD_XREFERENCE_LABEL" description="JFIELD_XREFERENCE_DESC"
+			size="20" />
+
+    </fieldset>
+
+    <fieldset name="publication" label="COM_ALBOPRETORIO_FIELDSET_PUBLICATION">
+
+        <field name="publish_up" type="calendar" required="true"
+			label="JGLOBAL_FIELD_PUBLISH_UP_LABEL" description="JGLOBAL_FIELD_PUBLISH_UP_DESC"
+			format="%Y-%m-%d" size="22"
+			filter="user_utc"
+            default="NOW" />
+
+		<field name="publish_down" type="calendar" required="true"
+			label="JGLOBAL_FIELD_PUBLISH_DOWN_LABEL" description="JGLOBAL_FIELD_PUBLISH_DOWN_DESC"
+			format="%Y-%m-%d" size="22"
+			filter="user_utc"
+             />
+
+        <field name="hide" type="radio" default="0"
+			label="COM_ALBOPRETORIO_FIELD_HIDE_LABEL"
+			description="COM_ALBOPRETORIO_FIELD_HIDE_DESC"
+			class="btn-group btn-group-yesno">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+
+    </fieldset>
+
+    <fieldset name="attachments" label="COM_ALBOPRETORIO_FIELDSET_ATTACHMENTS">
+        <field
+            name="filename0" required="false"
+            type="file"
+            label="COM_ALBOPRETORIO_FIELD_ATTACHMENT_LABEL"
+            description="COM_ALBOPRETORIO_FIELD_ATTACHMENT_DESC" />
+        <field
+            name="filename1"
+            type="file"
+            label="COM_ALBOPRETORIO_FIELD_ATTACHMENT_LABEL"
+            description="COM_ALBOPRETORIO_FIELD_ATTACHMENT_DESC" />
+        <field
+            name="filename2"
+            type="file"
+            label="COM_ALBOPRETORIO_FIELD_ATTACHMENT_LABEL"
+            description="COM_ALBOPRETORIO_FIELD_ATTACHMENT_DESC" />
+        <field
+            name="filename3"
+            type="file"
+            label="COM_ALBOPRETORIO_FIELD_ATTACHMENT_LABEL"
+            description="COM_ALBOPRETORIO_FIELD_ATTACHMENT_DESC" />
+        <field
+            name="filename4"
+            type="file"
+            label="COM_ALBOPRETORIO_FIELD_ATTACHMENT_LABEL"
+            description="COM_ALBOPRETORIO_FIELD_ATTACHMENT_DESC" />
+        <field
+            name="filename5"
+            type="file"
+            label="COM_ALBOPRETORIO_FIELD_ATTACHMENT_LABEL"
+            description="COM_ALBOPRETORIO_FIELD_ATTACHMENT_DESC" />
+        <field
+            name="filename6"
+            type="file"
+            label="COM_ALBOPRETORIO_FIELD_ATTACHMENT_LABEL"
+            description="COM_ALBOPRETORIO_FIELD_ATTACHMENT_DESC" />
+        <field
+            name="filename7"
+            type="file"
+            label="COM_ALBOPRETORIO_FIELD_ATTACHMENT_LABEL"
+            description="COM_ALBOPRETORIO_FIELD_ATTACHMENT_DESC" />
+        <field
+            name="filename8"
+            type="file"
+            label="COM_ALBOPRETORIO_FIELD_ATTACHMENT_LABEL"
+            description="COM_ALBOPRETORIO_FIELD_ATTACHMENT_DESC" />
+        <field
+            name="filename9"
+            type="file"
+            label="COM_ALBOPRETORIO_FIELD_ATTACHMENT_LABEL"
+            description="COM_ALBOPRETORIO_FIELD_ATTACHMENT_DESC" />
+        <field
+            name="filename10"
+            type="file"
+            label="COM_ALBOPRETORIO_FIELD_ATTACHMENT_LABEL"
+            description="COM_ALBOPRETORIO_FIELD_ATTACHMENT_DESC" />
+        <field
+            name="filename11"
+            type="file"
+            label="COM_ALBOPRETORIO_FIELD_ATTACHMENT_LABEL"
+            description="COM_ALBOPRETORIO_FIELD_ATTACHMENT_DESC" />
+
+	</fieldset>
+
+    <fieldset name="official" label="COM_ALBOPRETORIO_FIELDSET_OFFICIAL">
+        <field name="document_date" type="calendar" label="COM_ALBOPRETORIO_FIELD_DOCUMENT_DATE_LABEL"
+			description="COM_ALBOPRETORIO_FIELD_DOCUMENT_DATE_DESC"
+			required="true"
+            default="NOW" />
+        <field name="document_number" label="COM_ALBOPRETORIO_FIELD_DOCUMENT_NUMBER_LABEL"
+			description="COM_ALBOPRETORIO_FIELD_DOCUMENT_NUMBER_DESC"
+			required="true" />
+        <field name="official_number" label="COM_ALBOPRETORIO_FIELD_OFFICIAL_NUMBER_LABEL"
+			description="COM_ALBOPRETORIO_FIELD_OFFICIAL_NUMBER_DESC"
+			required="true" />
+    </fieldset>
+
+
+		<fields name="metadata" label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
+		<fieldset name="jmetadata" label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
+
+			<field name="robots"
+			type="list"
+			label="JFIELD_METADATA_ROBOTS_LABEL"
+			description="JFIELD_METADATA_ROBOTS_DESC"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="index, follow">JGLOBAL_INDEX_FOLLOW</option>
+				<option value="noindex, follow">JGLOBAL_NOINDEX_FOLLOW</option>
+				<option value="index, nofollow">JGLOBAL_INDEX_NOFOLLOW</option>
+				<option value="noindex, nofollow">JGLOBAL_NOINDEX_NOFOLLOW</option>
+			</field>
+
+			<field name="rights" type="text"
+				label="JFIELD_META_RIGHTS_LABEL" description="JFIELD_META_RIGHTS_DESC"
+				required="false" filter="string" cols="30" rows="2" />
+		</fieldset>
+
+		<field name="hits"
+			type="text"
+			class="readonly"
+			size="6" label="JGLOBAL_HITS"
+			description="COM_WEBLINKS_HITS_DESC"
+			readonly="true"
+			filter="unset" />
+
+	</fields>
+</form>
