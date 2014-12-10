@@ -2,7 +2,7 @@
 <extension type="component" version="3.1" method="upgrade">
 	<name>com_albopretorio</name>
 	<author>Alessandro Pasotti - ItOpen</author>
-	<creationDate>2014-12-09</creationDate>
+	<creationDate>2014-12-10</creationDate>
 	<copyright>(C) 2014 ItOpen. All rights reserved.	</copyright>
 	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
 	<authorEmail>info@itopen.it</authorEmail>
@@ -10,6 +10,9 @@
 	<version>1.1</version>
 	<description>COM_ALBOPRETORIO_XML_DESCRIPTION</description>
 
+    <updateservers>
+        <server type="extension" priority="1" name="Aggiornamenti Albo Pretorio">https://github.com/elpaso/com_albopretorio/update.xml</server>
+    </updateservers>
 
     <!-- Runs on install/uninstall/update; New in 1.6 -->
     <scriptfile>install.php</scriptfile>
