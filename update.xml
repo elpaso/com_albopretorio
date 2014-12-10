@@ -14,5 +14,5 @@
     <maintainer>Alessandro Pasotti (ItOpen)</maintainer>
     <maintainerurl>http:///www.itopen.it</maintainerurl>
     <section>Testing</section>
-    <targetplatform name="joomla" version="3.2.2"/>
+    <targetplatform name="joomla" version="3.3"/>
  </update>
