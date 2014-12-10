@@ -1,4 +1,4 @@
-com_allbopretorio
+com_albopretorio
 =================
 
 Albo pretorio online per Joomla! 3
