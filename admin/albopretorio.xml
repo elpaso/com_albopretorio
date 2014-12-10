@@ -11,7 +11,7 @@
 	<description>COM_ALBOPRETORIO_XML_DESCRIPTION</description>
 
     <updateservers>
-        <server type="extension" priority="1" name="Aggiornamenti Albo Pretorio">https://github.com/elpaso/com_albopretorio/update.xml</server>
+        <server type="extension" priority="1" name="Aggiornamenti Albo Pretorio">https://raw.githubusercontent.com/elpaso/com_albopretorio/master/update.xml</server>
     </updateservers>
 
     <!-- Runs on install/uninstall/update; New in 1.6 -->
