@@ -4,7 +4,7 @@
 	<author>Alessandro Pasotti - ItOpen</author>
 	<creationDate>2014-12-11</creationDate>
 	<copyright>(C) 2014 ItOpen. All rights reserved.	</copyright>
-	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
+	<license>GNU Affero General Public License version 3 or later; see	LICENSE.txt</license>
 	<authorEmail>info@itopen.it</authorEmail>
 	<authorUrl>www.itopen.it</authorUrl>
 	<version>1.2</version>
@@ -67,4 +67,3 @@
 		</languages>
 	</administration>
 </extension>
-
