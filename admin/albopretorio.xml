@@ -2,17 +2,16 @@
 <extension type="component" version="3.1" method="upgrade">
 	<name>com_albopretorio</name>
 	<author>Alessandro Pasotti - ItOpen</author>
-	<creationDate>November 2014</creationDate>
+	<creationDate>2015-01-13</creationDate>
 	<copyright>(C) 2014 ItOpen. All rights reserved.	</copyright>
-	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
+	<license>GNU Affero General Public License version 3 or later; see	LICENSE.txt</license>
 	<authorEmail>info@itopen.it</authorEmail>
 	<authorUrl>www.itopen.it</authorUrl>
-	<version>1.0</version>
+	<version>1.3</version>
 	<description>COM_ALBOPRETORIO_XML_DESCRIPTION</description>
 
     <updateservers>
-        <server type="extension" priority="1" name="Aggiornamenti Albo Pretorio">http://rawgit.com/elpaso/com_albopretorio/master/update.xml</server>
-        <!-- definitivo cachato https://cdn.rawgit.com/elpaso/com_albopretorio/master/update.xml -->
+        <server type="extension" priority="1" name="Aggiornamenti Albo Pretorio">https://raw.githubusercontent.com/elpaso/com_albopretorio/master/update.xml</server>
     </updateservers>
 
     <!-- Runs on install/uninstall/update; New in 1.6 -->
@@ -68,4 +67,3 @@
 		</languages>
 	</administration>
 </extension>
-
