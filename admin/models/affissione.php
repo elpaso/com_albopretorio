@@ -483,7 +483,26 @@ class AlbopretorioModelAffissione extends JModelAdmin {
 			$db = JFactory::getDBO ();
 			$db->setQuery ( "SELECT title FROM #__categories WHERE id = " . $item->catid . " LIMIT 1;" );
 			$item->category_title = $db->loadResult ();
-		}
+		} else {
+
+            // Get latest number
+            $db = JFactory::getDBO ();
+            $db->setQuery ( "SELECT COUNT(id) FROM #__albopretorio" );
+            if ( $db->loadResult () > 0) {
+                // If numerical ordering:
+                // Autoincrement?
+                jimport('joomla.application.component.helper');
+                if (  JComponentHelper::getParams('com_albopretorio')->get('autoincrement_sort_numerically') == '1' ) {
+                    $db->setQuery ( "SELECT official_number FROM #__albopretorio ORDER BY CAST(official_number as SIGNED INTEGER) DESC LIMIT 1;" );
+                } else {
+                    $db->setQuery ( "SELECT official_number FROM #__albopretorio ORDER BY official_number DESC LIMIT 1;" );
+                }
+                $item->official_number = (int) $db->loadResult () + 1;
+            } else {
+                $item->official_number = 1;
+            }
+
+        }
 
 		// Load associated albopretorio items
 		$app = JFactory::getApplication ();

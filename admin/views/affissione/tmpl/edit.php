@@ -94,8 +94,31 @@ $assoc = JLanguageAssociations::isEnabled();
 
 		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'official', JText::_('COM_ALBOPRETORIO_FIELDSET_OFFICIAL', true) ); ?>
         <?php
-        $this->fieldset = 'official';
-        echo JLayoutHelper::render('joomla.edit.fieldset', $this);
+
+        // Official field set
+
+        // Autoincrement?
+        jimport('joomla.application.component.helper');
+
+        $fields = array('document_date', 'document_number');
+
+        $html = array();
+        foreach ($fields as $f)
+        {
+            $field = $this->form->getField($f);
+            $html[] = $field->renderField();
+        }
+
+        $autoincrement_official_number = JComponentHelper::getParams('com_albopretorio')->get('autoincrement_official_number');
+        if ( $autoincrement_official_number == '1'){
+            $this->form->setFieldAttribute('official_number', 'readonly', 'true');
+        }
+        $field = $this->form->getField('official_number');
+        $html[] = $field->renderField();
+
+        echo implode('', $html);
+
+
         ?>
         <?php echo JHtml::_('bootstrap.endTab'); ?>
 
