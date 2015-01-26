@@ -5,7 +5,7 @@
         <description>Albo Pretorio online per Joomla! 3</description>
         <element>com_albopretorio</element>
         <type>component</type>
-        <version>1.4</version>
+        <version>1.6</version>
         <infourl title="Albo Pretorio online per Joomla! 3">http://www.itopen.it/2014/12/09/albo-pretorio-per-joomla-3/</infourl>
         <downloads>
             <downloadurl type="full" format="zip">https://github.com/elpaso/com_albopretorio/archive/master.zip</downloadurl>

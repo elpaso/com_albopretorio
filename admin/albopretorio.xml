@@ -2,12 +2,13 @@
 <extension type="component" version="3.1" method="upgrade">
 	<name>com_albopretorio</name>
 	<author>Alessandro Pasotti - ItOpen</author>
-	<creationDate>2015-01-19</creationDate>
-	<copyright>(C) 2014 ItOpen. All rights reserved.	</copyright>
+	<version>1.4</version>
+	<creationDate>2015-01-26</creationDate>
+	<copyright>(C) 2014-2015 ItOpen. All rights reserved.	</copyright>
 	<license>GNU Affero General Public License version 3 or later; see	LICENSE.txt</license>
 	<authorEmail>info@itopen.it</authorEmail>
 	<authorUrl>www.itopen.it</authorUrl>
-	<version>1.4</version>
+	<version>1.6</version>
 	<description>COM_ALBOPRETORIO_XML_DESCRIPTION</description>
 
     <updateservers>
@@ -37,6 +38,13 @@
 		<folder>helpers</folder>
 		<folder>views</folder>
 	</files>
+
+
+    <plugins>
+        <plugin folder="plugins/system" plugin="albopretorio" name="System - Albo Pretorio" group="system" />
+    </plugins>
+
+
 	<administration>
 		<menu img="class:albopretorio">com_albopretorio</menu>
 		<submenu>

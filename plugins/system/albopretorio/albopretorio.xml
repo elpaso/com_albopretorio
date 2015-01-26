@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="system" method="upgrade">
+    <name>Albo Pretorio</name>
+    <author>Alessandro Pasotti - ItOpen</author>
+    <creationDate>2014-12-12</creationDate>
+    <copyright>Copyright (C) 2015 ItOpen. All rights reserved.</copyright>
+    <license>http://www.fsf.org/licensing/licenses/agpl-3.0.htm GNU/Affero</license>
+    <authorEmail>info@itopen.it</authorEmail>
+    <authorUrl>www.itopen.org</authorUrl>
+    <version>3.10</version>
+    <description></description>
+    <files>
+        <filename plugin="albopretorio">albopretorio.php</filename>
+    </files>
+</extension>

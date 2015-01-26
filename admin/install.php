@@ -33,6 +33,42 @@ if(!defined('DS')){
  */
 class com_AlbopretorioInstallerScript
 {
+
+        function activatePlugins(){
+            $db = JFactory::getDbo();
+
+            // Activate albopretorio system plugin
+            $db->setQuery("UPDATE #__extensions SET enabled=1 WHERE type='plugin' AND element='albopretorio' AND folder='system'");
+            $db->execute();
+        }
+
+        function installOthers($parent) {
+            $manifest = $parent->get("manifest");
+            $parent = $parent->getParent();
+            $source = $parent->getPath("source");
+
+            $installer = new JInstaller();
+
+            // Install plugins
+            if($manifest->attributes('plugins')){
+                foreach($manifest->plugins->plugin as $plugin) {
+                    $attributes = $plugin->attributes();
+                    $plg = $source . DS . $attributes['folder'].DS.$attributes['plugin'];
+                    $installer->install($plg);
+                }
+            }
+
+            // Install modules
+            if($manifest->attributes('modules')){
+                foreach($manifest->modules->module as $module) {
+                    $attributes = $module->attributes();
+                    $mod = $source . DS . $attributes['folder'].DS.$attributes['module'];
+                    $installer->install($mod);
+                }
+            }
+        }
+
+
         /**
          * method to install the component
          *
@@ -40,28 +76,8 @@ class com_AlbopretorioInstallerScript
          */
         function install($parent)
         {
-            $manifest = $parent->get("manifest");
-            $parent = $parent->getParent();
-            $source = $parent->getPath("source");
+            $this->installOthers($parent);
 
-            $installer = new JInstaller();
-
-            /*/ Install plugins
-            foreach($manifest->plugins->plugin as $plugin) {
-                $attributes = $plugin->attributes();
-                $plg = $source . DS . $attributes['folder'].DS.$attributes['plugin'];
-                $installer->install($plg);
-            }
-
-            // Install modules
-            foreach($manifest->modules->module as $module) {
-                $attributes = $module->attributes();
-                $mod = $source . DS . $attributes['folder'].DS.$attributes['module'];
-                $installer->install($mod);
-            }
-            * */
-
-            $db = JFactory::getDbo();
             /*
              * type_title 	varchar(255) 	Type title e.g. Article
                 type_alias 	varchar(255) 	Type alias e.g. com_content.article
@@ -132,6 +148,8 @@ class com_AlbopretorioInstallerScript
             );
             $db->execute();
 
+            $this->activatePlugins();
+
         }
 
         /**
@@ -141,25 +159,9 @@ class com_AlbopretorioInstallerScript
          */
         function update($parent)
         {
-            $manifest = $parent->get("manifest");
-            $parent = $parent->getParent();
-            $source = $parent->getPath("source");
 
-            $installer = new JInstaller();
-
-            // Install plugins
-            foreach($manifest->plugins->plugin as $plugin) {
-                $attributes = $plugin->attributes();
-                $plg = $source . DS . $attributes['folder'].DS.$attributes['plugin'];
-                $installer->install($plg);
-            }
-
-            // Install modules
-            foreach($manifest->modules->module as $module) {
-                $attributes = $module->attributes();
-                $mod = $source . DS . $attributes['folder'].DS.$attributes['module'];
-                $installer->install($mod);
-            }
+            $this->installOthers($parent);
+            $this->activatePlugins();
 
         }
 
