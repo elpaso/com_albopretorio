@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="COM_ALBOPRETORIO_VIEW_DEFAULT_TITLE" option="COM_ALBOPRETORIO_VIEW_DEFAULT_OPTION">
+	<layout title="COM_ALBOPRETORIO_VIEW_ARCHIVE_TITLE" option="COM_ALBOPRETORIO_VIEW_ARCHIVE_OPTION">
 
 		<message>
-			<![CDATA[COM_ALBOPRETORIO_VIEW_DEFAULT_DESC]]>
+			<![CDATA[COM_ALBOPRETORIO_VIEW_ARCHIVE_DESC]]>
 		</message>
 	</layout>
-
     <!-- Add fields to the parameters object for the layout. -->
     <fields name="params">
         <fieldset name="basic" label="COM_ALBOPRETORIO_VIEW_BASIC_OPTIONS">
@@ -19,5 +18,4 @@
 
         </fieldset>
     </fields>
-
 </metadata>

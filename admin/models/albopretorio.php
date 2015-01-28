@@ -84,6 +84,15 @@ class AlbopretorioModelAlbopretorio extends JModelList
 			}
 		}
 
+        // Automatic archiver
+        $db =  JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->update($db->quoteName('#__albopretorio'))
+            ->set($db->quoteName('published') . '=\'2\'')
+            ->where($db->quoteName('published') . '= 1 AND publish_down < "'. date('Y-m-d') . '"');
+        $db->setQuery($query);
+        $db->execute();
+
 		parent::__construct($config);
 	}
 
@@ -116,7 +125,7 @@ class AlbopretorioModelAlbopretorio extends JModelList
 		$document_date = $this->getUserStateFromRequest($this->context . '.filter.document_date', 'filter_document_date', '', 'date');
 		$this->setState('filter.document_date', $document_date);
 
-		$hide = $this->getUserStateFromRequest($this->context . '.filter.hide', 'filter_hide', '', 'date');
+		$hide = $this->getUserStateFromRequest($this->context . '.filter.hide', 'filter_hide', 0, 'int');
 		$this->setState('filter.hide', $hide);
 
 		$document_number = $this->getUserStateFromRequest($this->context . '.filter.document_number', 'filter_document_number', '', 'string');

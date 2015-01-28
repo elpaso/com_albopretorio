@@ -68,6 +68,10 @@ class AlbopretorioViewCategory extends AlbopretorioViewAlbopretorio {
 	public function display($tpl = null) {
 
 		$catid = JRequest::getInt ( 'catid' );
+        if(!$catid){
+            $catid = JRequest::getInt ( 'id' );
+        }
+
         $app  = JFactory::getApplication();
 
 		$categories = JCategories::getInstance ( 'Albopretorio' );

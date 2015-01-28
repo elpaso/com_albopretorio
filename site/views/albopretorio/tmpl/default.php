@@ -36,30 +36,31 @@ else
 	?>
 <div class="albopretorio<?php echo $this->params->get('pageclass_sfx') ?>">
     <?php if ($this->category) :  ?>
-    <div class="clearfix">
-        <h1>
-            <?php echo $this->escape($this->category->title); ?>
-        </h1>
-    <?php if ($this->params->get('show_cat_tags', 1) && !empty($this->category->tags)) : ?>
-		<?php $this->category->tagLayout = new JLayoutFile('joomla.content.tags'); ?>
-		<?php echo $this->category->tagLayout->render($this->category->tags); ?>
-	<?php endif; ?>
-        <a class="btn btn-primary pull-right" href="<?php echo AlbopretorioHelperRoute::getAlbopretorioRoute() ?>"><?php echo JText::_('COM_ALBOPRETORIO_ALL'); ?></a>
-    </div>
-
-
-    <?php if ($this->params->get('show_description')) :  ?>
-        <?php echo $this->category->description; ?>
-    <?php endif; ?>
+        <div class="clearfix">
+            <h1>
+                <?php echo $this->escape($this->category->title); ?>
+            </h1>
+        <?php if ($this->params->get('show_cat_tags', 1) && !empty($this->category->tags)) : ?>
+            <?php $this->category->tagLayout = new JLayoutFile('joomla.content.tags'); ?>
+            <?php echo $this->category->tagLayout->render($this->category->tags); ?>
+        <?php endif; ?>
+            <a class="btn btn-primary pull-right" href="<?php echo AlbopretorioHelperRoute::getAlbopretorioRoute() ?>"><?php echo JText::_('COM_ALBOPRETORIO_ALL'); ?></a>
+        </div>
+        <?php if ($this->params->get('show_description')) :  ?>
+            <?php echo $this->category->description; ?>
+        <?php endif; ?>
     <?php elseif ($this->params->get('show_page_heading')) :  ?>
-	<h1>
-		<?php echo $this->escape($this->params->get('page_heading')); ?>
-	</h1>
-	<?php else: ?>
-    <h1>
-		<?php echo $this->escape($this->params->get('page_title')); ?>
-	</h1>
-	<?php endif; ?>
+        <h1>
+            <?php echo $this->escape($this->params->get('page_heading')); ?>
+        </h1>
+    <?php else: ?>
+        <h1>
+            <?php echo $this->escape($this->params->get('page_title')); ?>
+        </h1>
+    <?php endif; ?>
+    <?php if ($this->params->get('description')) :  ?>
+        <?php echo $this->params->get('description'); ?>
+    <?php endif; ?>
     <?php echo $this->loadTemplate('items');
     AlbopretorioHelper::getSignature(); ?>
 </div>

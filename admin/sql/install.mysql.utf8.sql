@@ -51,6 +51,7 @@ CREATE TABLE `#__albopretorio` (
   KEY `idx_language` (`language`),
   KEY `idx_xreference` (`xreference`),
   -- ABP
+  KEY `idx_name` (`name`),
   KEY `idx_document_date` (`document_date`),
   KEY `idx_document_number` (`document_number`),
   KEY `idx_official_number` (`official_number`)
