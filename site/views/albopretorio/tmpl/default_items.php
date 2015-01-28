@@ -100,26 +100,26 @@ $assoc = JLanguageAssociations::isEnabled ();
 		<thead>
 			<tr>
 				<th class="title">
-						<?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_NAME', 'a.name', $listDirn, $listOrder); ?>
-					</th>
+                    <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_NAME', 'a.name', $listDirn, $listOrder); ?>
+                </th>
 				<th width="10%" class="hidden-phone">
-                        <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_DOCUMENT_NUMBER', 'a.document_number', $listDirn, $listOrder); ?>
-                    </th>
-				<th width="10%" class=" hidden-phone">
-                        <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_OFFICIAL_NUMBER', 'a.official_number', $listDirn, $listOrder); ?>
-                    </th>
+                    <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_DOCUMENT_NUMBER', 'a.document_number', $listDirn, $listOrder); ?>
+                </th>
 				<th width="10%" class="hidden-phone">
-                        <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_DOCUMENT_DATE', 'a.document_date', $listDirn, $listOrder); ?>
-                    </th>
+                    <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_OFFICIAL_NUMBER', 'a.official_number', $listDirn, $listOrder); ?>
+                </th>
 				<th width="10%" class="hidden-phone">
-                        <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_PUBLISH_DATE', 'a.publish_up', $listDirn, $listOrder); ?>
-                    </th>
+                    <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_DOCUMENT_DATE', 'a.document_date', $listDirn, $listOrder); ?>
+                </th>
 				<th width="10%" class="hidden-phone">
-                        <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_SUSPEND_DATE', 'a.publish_down', $listDirn, $listOrder); ?>
-                    </th>
+                    <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_PUBLISH_DATE', 'a.publish_up', $listDirn, $listOrder); ?>
+                </th>
+				<th width="10%" class="hidden-phone">
+                    <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_SUSPEND_DATE', 'a.publish_down', $listDirn, $listOrder); ?>
+                </th>
 				<th class="hidden-phone">
-                        <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_CATEGORY', 'a.category_title', $listDirn, $listOrder); ?>
-                    </th>
+                    <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_CATEGORY', 'a.category_title', $listDirn, $listOrder); ?>
+                </th>
 			</tr>
 		</thead>
 		<tfoot>

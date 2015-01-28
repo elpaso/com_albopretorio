@@ -85,6 +85,10 @@ class AlbopretorioRouter extends JComponentRouterBase
 			return $segments;
 		}
 
+        if(!isset($query['catid']) && isset($query['id']) && $view == 'category'){
+            $query['catid'] = $query['id'];
+        }
+
 		if (isset($view) and ($view == 'category' or $view == 'affissione'))
 		{
 			if ($mCatId != (int) @$query['catid'] || $mId != (int) @$query['id'] || $mView != $view)

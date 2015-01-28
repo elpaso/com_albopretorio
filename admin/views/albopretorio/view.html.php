@@ -2,7 +2,7 @@
 /**
 *
 * @package      COM_ALBOPRETORIO
-* @copyright    Copyright (C) 2014 Alessandro Pasotti http://www.itopen.it All rights reserved.
+* @copyright    Copyright (C) 2014-2015 Alessandro Pasotti http://www.itopen.it All rights reserved.
 * @license      GNU/AGPL
 
     This program is free software: you can redistribute it and/or modify

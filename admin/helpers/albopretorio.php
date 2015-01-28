@@ -48,11 +48,17 @@ class AlbopretorioHelper extends JHelperContent
 			$vName == 'albopretorio'
 		);
 
-		JHtmlSidebar::addEntry(
-			JText::_('COM_ALBOPRETORIO_SUBMENU_CATEGORIE'),
-			'index.php?option=com_categories&extension=com_albopretorio',
-			$vName == 'categories'
-		);
+        // Check for custom ACL rule category.create
+        // This works, but categories can still be reached from the menu!
+        // This needs a plugin
+        $canDo  = JHelperContent::getActions('com_albopretorio');
+        if($canDo->get('category.create', true)){
+            JHtmlSidebar::addEntry(
+                JText::_('COM_ALBOPRETORIO_SUBMENU_CATEGORIE'),
+                'index.php?option=com_categories&extension=com_albopretorio',
+                $vName == 'categories'
+            );
+        }
 	}
 
 	public static function getSignature(){
@@ -61,7 +67,7 @@ class AlbopretorioHelper extends JHelperContent
 		<?php
 	}
 
-    public static function getCategoryPath($category, $glue = ' <i class="icon icon-arrow-right-3"></i> '){
+    public static function getCategoryPath($category, $glue = ' <em class="icon icon-arrow-right-3"></em> '){
 
         $pieces = array();
         $category_pathway = array();
