@@ -133,6 +133,18 @@ class AlbopretorioModelAffissione extends JModelAdmin {
 		return $newIds;
 	}
 
+
+    /**
+    * @brief Check pub dates and publish state
+    *
+    * @return
+    */
+    public function isPublished($item) {
+        return     $item->published == '1'
+                && $item->publish_up < date('Y-m-d H:i:s')
+                && $item->publish_down > date('Y-m-d H:i:s');
+    }
+
 	/**
 	 * Method to test whether a record can be deleted.
 	 *
@@ -149,11 +161,18 @@ class AlbopretorioModelAffissione extends JModelAdmin {
 			$user = JFactory::getUser ();
 
 			if (! empty ( $record->catid )) {
-				return $user->authorise ( 'core.delete', 'com_albopretorio.category.' . ( int ) $record->catid );
+				$canDelete = $user->authorise ( 'core.delete', 'com_albopretorio.category.' . ( int ) $record->catid );
 			} else {
-				return parent::canDelete ( $record );
+				$canDelete = parent::canDelete ( $record );
 			}
 		}
+        // ABP: Additional check on pub dates: deny if published, only superadmin can change
+        if ( $canDelete && ! $user->authorise('core.admin')  && $record->id )
+        {
+            $item = $this->getItem ( $record->id );
+            $canDelete = ! $this->isPublished($item);
+        }
+        return $canDelete;
 	}
 
 	/**
@@ -168,10 +187,18 @@ class AlbopretorioModelAffissione extends JModelAdmin {
 		$user = JFactory::getUser ();
 
 		if (! empty ( $record->catid )) {
-			return $user->authorise ( 'core.edit.state', 'com_albopretorio.category.' . ( int ) $record->catid );
+			$canEditState = $user->authorise ( 'core.edit.state', 'com_albopretorio.category.' . ( int ) $record->catid );
 		} else {
-			return parent::canEditState ( $record );
+			$canEditState = parent::canEditState ( $record );
 		}
+
+        // ABP: Additional check on pub dates: deny if published, only superadmin can change
+        if ( $canEditState && ! $user->authorise('core.admin') && $record->id )
+        {
+            $item = $this->getItem ($record->id);
+            $canEditState = ! $this->isPublished($item);
+        }
+        return $canEditState;
 	}
 
 	/**
@@ -200,6 +227,7 @@ class AlbopretorioModelAffissione extends JModelAdmin {
 	 * @since 1.6
 	 */
 	public function getForm($data = array(), $loadData = true) {
+
 		// Get the form.
 		$form = $this->loadForm ( 'com_albopretorio.affissione', 'affissione', array (
 				'control' => 'jform',
@@ -208,6 +236,22 @@ class AlbopretorioModelAffissione extends JModelAdmin {
 		if (empty ( $form )) {
 			return false;
 		}
+
+        // ABP: now implemented in allowEdit at the controller level - Joomla! Sucks! (TM)
+        /*/ Checks if canEdit
+        if($form->getData()->get('id'))
+        {
+            if(! $this->canEdit( (object) $form->getData()->toObject( ) ))
+            {
+                $app = JFactory::getApplication ();
+                // Add a message to the message queue
+                $app->enqueueMessage ( JText::_ ( 'COM_ALBOPRETORIO_CANNOT_EDIT_PUBLISHED_DOCUMENT' ), 'warning' );
+                $this->checkin($form->getData()->get('id'));
+                $link = JRoute::_('index.php?option=com_albopretorio');
+                $app->redirect($link);
+                return;
+            }
+        }*/
 
 		// Determine correct permissions to check.
 		if ($this->getState ( 'affissione.id' )) {
@@ -219,19 +263,31 @@ class AlbopretorioModelAffissione extends JModelAdmin {
 		}
 
 		// Modify the form based on access controls.
-		if (! $this->canEditState ( ( object ) $data )) {
-			// Disable fields for display.
-			$form->setFieldAttribute ( 'ordering', 'disabled', 'true' );
-			$form->setFieldAttribute ( 'published', 'disabled', 'true' );
-			$form->setFieldAttribute ( 'publish_up', 'disabled', 'true' );
-			$form->setFieldAttribute ( 'publish_down', 'disabled', 'true' );
+		if (! $data ){
+            $data = (object) $form->getData()->toObject( ) ;
+        }
+		if ( ! $this->canEditState ( ( object ) $data )) {
 
-			// Disable fields while saving.
-			// The controller has already verified this is a record you can edit.
-			$form->setFieldAttribute ( 'ordering', 'filter', 'unset' );
-			$form->setFieldAttribute ( 'published', 'filter', 'unset' );
-			$form->setFieldAttribute ( 'publish_up', 'filter', 'unset' );
-			$form->setFieldAttribute ( 'publish_down', 'filter', 'unset' );
+            // Disable fields for display.
+            $form->setFieldAttribute ( 'ordering', 'disabled', 'true' );
+            $form->setFieldAttribute ( 'published', 'disabled', 'true' );
+
+            // Disable fields while saving.
+            // The controller has already verified this is a record you can edit.
+            $form->setFieldAttribute ( 'ordering', 'filter', 'unset' );
+            $form->setFieldAttribute ( 'published', 'filter', 'unset' );
+
+            // Only disable fields if it's an existing record
+            if  ($data->id) {
+                $form->setFieldAttribute ( 'publish_up', 'disabled', 'true' );
+                $form->setFieldAttribute ( 'publish_down', 'disabled', 'true' );
+
+                $form->setFieldAttribute ( 'publish_up', 'filter', 'unset' );
+                $form->setFieldAttribute ( 'publish_down', 'filter', 'unset' );
+                // ABP: these are required fields... unset required to allow saving
+                $form->setFieldAttribute ( 'publish_up', 'required', 'false' );
+                $form->setFieldAttribute ( 'publish_down', 'required', 'false' );
+            }
 		}
 
 		return $form;
@@ -246,7 +302,6 @@ class AlbopretorioModelAffissione extends JModelAdmin {
 	protected function loadFormData() {
 		// Check the session for previously entered form data.
 		$data = JFactory::getApplication ()->getUserState ( 'com_albopretorio.edit.affissione.data', array () );
-
 		if (empty ( $data )) {
 			$data = $this->getItem ();
 
@@ -261,12 +316,13 @@ class AlbopretorioModelAffissione extends JModelAdmin {
 
 		return $data;
 	}
+
 	public function makeFolder($folder) {
 		if (! JFolder::exists ( $folder )) {
 			if (! JFolder::create ( $folder )) {
-				$application = JFactory::getApplication ();
+				$app = JFactory::getApplication ();
 				// Add a message to the message queue
-				$application->enqueueMessage ( JText::_ ( 'COM_ALBOPRETORIO_CANNOT_CREATE_UPLOAD_FOLDER' ) . ' ' . $folder, 'warning' );
+				$app->enqueueMessage ( JText::_ ( 'COM_ALBOPRETORIO_CANNOT_CREATE_UPLOAD_FOLDER' ) . ' ' . $folder, 'warning' );
 				return false;
 			}
 		}
@@ -305,7 +361,6 @@ class AlbopretorioModelAffissione extends JModelAdmin {
 				$item = false;
 			}
 
-			$application = JFactory::getApplication ();
 			// Store files
 			jimport ( 'joomla.filesystem.file' );
 			jimport ( 'joomla.filesystem.folder' );
@@ -320,8 +375,8 @@ class AlbopretorioModelAffissione extends JModelAdmin {
 			$uploaded = 0;
 			foreach ( $files as $fname => $file ) {
 				// Clean up filename to get rid of strange characters like spaces etc
-				$filename = JFile::makeSafe ( $file ['name'] );
-				if (! $filename) {
+				$uploaded_filename = JFile::makeSafe ( $file ['name'] );
+				if (! $uploaded_filename) {
 					continue;
 				}
 				// Set up the source and destination of the file
@@ -331,31 +386,37 @@ class AlbopretorioModelAffissione extends JModelAdmin {
 				$today = getdate ();
 				$month = $today ['mon'];
 				$year = $today ['year'];
-				if (! $this->makeFolder ( $base_path . '/' . $year )) {
-					return false;
-				}
-				if (! $this->makeFolder ( $base_path . '/' . $year . '/' . $month )) {
-					return false;
-				}
 
-				$filename = $year . '/' . $month . '/' . $filename;
-
+				$filename = $year . '/' . $month . '/' . $uploaded_filename;
 				$dest = $base_path . '/' . $filename;
-				// First check if the file has the right extension, we avoid php
+
+				// Checks if there's a file with the same name
+				while ( file_exists($dest) ) {
+                    $ext = pathinfo($uploaded_filename, PATHINFO_EXTENSION);
+                    $base = pathinfo($uploaded_filename, PATHINFO_FILENAME);
+                    $number = '' . ((int) preg_replace("/.*?(\d+)$/", '\1', $base) + 1);
+                    $prefix = preg_replace("/(.*?)\d+$/", '\1', $base);
+                    $uploaded_filename = $prefix . $number . '.' . $ext;
+                    $filename = $year . '/' . $month . '/' . $uploaded_filename;
+                    $dest = $base_path . '/' . $filename;
+                }
+
+				// First check if the file has the right extension, we deny php
+				// TODO: make this configurable!
 				if (strtolower ( JFile::getExt ( $filename ) ) != 'php') {
 					if (! JFile::upload ( $src, $dest )) {
 						// Add a message to the message queue
-						$application->enqueueMessage ( JText::_ ( 'COM_ALBOPRETORIO_CANNOT_UPLOAD_ATTACHMENT' ) . ' ' . $dest, 'warning' );
+						$app->enqueueMessage ( JText::_ ( 'COM_ALBOPRETORIO_CANNOT_UPLOAD_ATTACHMENT' ) . ' ' . $dest, 'warning' );
 					} else {
 						// Add a message to the message queue
 						// Delete old file if any
 						if ($item && $item->$fname && $item->$fname != $filename) {
 							if (! JFile::delete ( $base_path . '/' . $item->$fname )) {
-								$application->enqueueMessage ( JText::_ ( 'COM_ALBOPRETORIO_DELETE_ATTACHMENT_ERROR' ) . ' ' . $item->$fname, 'warning' );
+								$app->enqueueMessage ( JText::_ ( 'COM_ALBOPRETORIO_DELETE_ATTACHMENT_ERROR' ) . ' ' . $item->$fname, 'warning' );
 							}
-							$application->enqueueMessage ( JText::_ ( 'COM_ALBOPRETORIO_OVERWRITE_ATTACHMENT_SUCCESS' ) . ' ' . $filename, 'message' );
+							$app->enqueueMessage ( JText::_ ( 'COM_ALBOPRETORIO_OVERWRITE_ATTACHMENT_SUCCESS' ) . ' ' . $filename, 'message' );
 						} else {
-							$application->enqueueMessage ( JText::_ ( 'COM_ALBOPRETORIO_UPLOAD_ATTACHMENT_SUCCESS' ) . ' ' . $filename, 'message' );
+							$app->enqueueMessage ( JText::_ ( 'COM_ALBOPRETORIO_UPLOAD_ATTACHMENT_SUCCESS' ) . ' ' . $filename, 'message' );
 						}
 						// Save new file name
 						$data [$fname] = $filename;
@@ -373,9 +434,9 @@ class AlbopretorioModelAffissione extends JModelAdmin {
 					if (array_key_exists ( $fname . '_remove', $form_data )) {
 						if (! $files [$fname] ['size'] && $item->$fname) {
 							if (! JFile::delete ( $base_path . '/' . $item->$fname )) {
-								$application->enqueueMessage ( JText::_ ( 'COM_ALBOPRETORIO_DELETE_ATTACHMENT_ERROR' ) . ' ' . $item->$fname, 'error' );
+								$app->enqueueMessage ( JText::_ ( 'COM_ALBOPRETORIO_DELETE_ATTACHMENT_ERROR' ) . ' ' . $item->$fname, 'error' );
 							} else {
-								$application->enqueueMessage ( JText::_ ( 'COM_ALBOPRETORIO_DELETE_ATTACHMENT_SUCCESS' ) . ' ' . $item->$fname, 'success' );
+								$app->enqueueMessage ( JText::_ ( 'COM_ALBOPRETORIO_DELETE_ATTACHMENT_SUCCESS' ) . ' ' . $item->$fname, 'notice' );
 								$removed ++;
 								$data [$fname] = '';
 							}
@@ -383,6 +444,7 @@ class AlbopretorioModelAffissione extends JModelAdmin {
 					}
 				}
 			}
+
 
 			// Update attachments
 			if ($uploaded || $removed) {
@@ -392,6 +454,34 @@ class AlbopretorioModelAffissione extends JModelAdmin {
 				}
 				parent::save ( $data );
 			}
+
+            // Check that we have at least one attachment...
+            $attachments = 0;
+            if ( ! $item )
+            {
+                for($i = 0; $i < 12; $i++)
+                {
+                    $fname = "filename$i";
+                    if( isset($data[$fname]) && $item[$fname] ) {
+                        $attachments++;
+                    }
+                }
+            } else {
+                // Reload item ...
+                $item = parent::getItem ( $data [$key] );
+                for($i = 0; $i < 12; $i++)
+                {
+                    $fname = "filename$i";
+                    if( isset($item->$fname) && $item->$fname) {
+                        $attachments++;
+                    }
+                }
+            }
+            if ( ! $uploaded && ! $attachments )
+            {
+                $app->enqueueMessage ( JText::_ ( 'COM_ALBOPRETORIO_NO_ATTACHMENTS' ) , 'warning' );
+            }
+
 
 			$assoc = JLanguageAssociations::isEnabled ();
 			if ($assoc) {
@@ -448,7 +538,10 @@ class AlbopretorioModelAffissione extends JModelAdmin {
 
 			return true;
 		} else {
-			vardie ( $this->getErrors () );
+            // vardie() for debugging
+            //foreach( $this->getErrors () as $error ){
+            //    $app->enqueueMessage ( $error, 'error' );
+            //}
 		}
 
 		return false;
@@ -562,8 +655,15 @@ class AlbopretorioModelAffissione extends JModelAdmin {
 			$table->modified_by = $user->get ( 'id' );
 		}
 
+        // Make sure publish_down date is included:
+        if (!empty( $table->publish_down ))
+        {
+            $table->publish_down = substr( $table->publish_down, 0, 10 ) . ' 23:59:59';
+        }
+
 		// Increment the content version number.
 		// $table->version++;
+
 	}
 
 	/**
@@ -579,6 +679,7 @@ class AlbopretorioModelAffissione extends JModelAdmin {
 		$condition [] = 'catid = ' . ( int ) $table->catid;
 		return $condition;
 	}
+
 	protected function preprocessForm(JForm $form, $data, $group = 'content') {
 		// Association albopretorio items
 		$app = JFactory::getApplication ();

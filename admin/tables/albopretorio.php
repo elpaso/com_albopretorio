@@ -80,6 +80,20 @@ class AlbopretorioTableAlbopretorio extends JTable
 			return false;
 		}
 
+        // Check this is not a new document and that the publish down date is > now
+        if ( !$this->id && (int) $this->publish_down > 0 &&  $this->publish_down <= date('Y-m-d') )
+        {
+            $this->setError(JText::_('COM_ALBOPRETORIO_ERROR_PUBLISH_DOWN_DATE_IN_THE_PAST'));
+            return false;
+        }
+
+        // Check this is not a new document and that the publish down date is > now
+        if ( !$this->id && (int) $this->publish_up > 0 &&  $this->publish_up < date('Y-m-d') )
+        {
+            $this->setError(JText::_('COM_ALBOPRETORIO_ERROR_PUBLISH_UP_DATE_IN_THE_PAST'));
+            return false;
+        }
+
 		// clean up keywords -- eliminate extra spaces between phrases
 		// and cr (\r) and lf (\n) characters from string
 		if (!empty($this->metakey))

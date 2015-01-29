@@ -91,13 +91,18 @@ class AlbopretorioControllerAffissione extends JControllerForm
 		if ($categoryId)
 		{
 			// The category has been set. Check the category permissions.
-			return $user->authorise('core.edit', $this->option . '.category.' . $categoryId);
+			$canEdit = $user->authorise('core.edit', $this->option . '.category.' . $categoryId);
 		}
 		else
 		{
 			// Since there is no asset tracking, revert to the component permissions.
-			return parent::allowEdit($data, $key);
+			$canEdit = parent::allowEdit($data, $key);
 		}
+        if ($recordId && $canEdit && ! $user->authorise('core.admin'))
+        {
+            $canEdit = ! $this->getModel()->isPublished( $this->getModel()->getItem($recordId) );
+        }
+        return $canEdit;
 	}
 
 	/**

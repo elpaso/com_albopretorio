@@ -159,6 +159,7 @@ $assoc		= JLanguageAssociations::isEnabled();
 			<?php foreach ($this->items as $i => $item) :
 				$ordering   = ($listOrder == 'a.ordering');
 				$canCreate  = $user->authorise('core.create',     'com_albopretorio.category.' . $item->catid);
+				// ABP: TODO: needs some more love from an helper... canEdit should take into account pub dates and special user permissions
 				$canEdit    = $user->authorise('core.edit',       'com_albopretorio.category.' . $item->catid);
 				$canCheckin = $user->authorise('core.manage',     'com_checkin') || $item->checked_out == $user->get('id') || $item->checked_out == 0;
 				$canChange  = $user->authorise('core.edit.state', 'com_albopretorio.category.' . $item->catid) && $canCheckin;

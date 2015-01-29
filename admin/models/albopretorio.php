@@ -371,6 +371,11 @@ class AlbopretorioModelAlbopretorio extends JModelList
 		{
 			$orderCol = 'c.title ' . $orderDirn . ', a.ordering';
 		}
+
+        if ( $orderCol == 'a.official_number' && JComponentHelper::getParams('com_albopretorio')->get('autoincrement_sort_numerically') == '1' ) {
+            $orderCol = " CAST(official_number as SIGNED INTEGER) ";
+        }
+
         if($orderCol && $orderDirn){
             $query->order($db->escape($orderCol . ' ' . $orderDirn));
 

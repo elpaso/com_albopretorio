@@ -35,7 +35,49 @@ class plgSystemAlbopretorio extends JPlugin
         $this->_component = JComponentHelper::getComponent('com_albopretorio');
     }
 
-    function onAfterRoute(){
+    /*
+    * adds additional fields to the user editing form
+    *
+    * @param JForm $form The form to be altered.
+    * @param mixed $data The associated data for the form.
+    *
+    * @return boolean
+    *
+    * @since 1.6
+    *
+    public function onContentPrepareForm($form, $data)
+    {
+        $app = JFactory::getApplication();
+        if (!$app->isAdmin())
+        {
+            return true;
+        }
+
+        if (!($form instanceof JForm))
+        {
+            $this->_subject->setError('JERROR_NOT_A_FORM');
+            return false;
+        }
+        // Check we are manipulating a valid form.
+        $name = $form->getName();
+        if ('com_categories.categorycom_albopretorio' != $name)
+        {
+            return true;
+        }
+
+        if ( $this->_component ){
+            $user    = JFactory::getUser();
+            if (! $user->authorise('category.create', 'com_albopretorio') ) {
+                JError::raiseWarning( 100, JText::_( 'COM_ALBOPRETORIO_CATEGORY_EDIT_DISALLOWED' ));
+                $link = JRoute::_('index.php?option=com_albopretorio');
+                JFactory::getApplication()->redirect($link);
+            }
+        }
+
+    }
+    //*/
+
+    public function onAfterRoute(){
 
         $app = JFactory::getApplication();
         if (!$app->isAdmin()
