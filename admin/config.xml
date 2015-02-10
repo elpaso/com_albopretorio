@@ -379,4 +379,20 @@
             <option value="1">JYES</option>
         </field>
     </fieldset>
+    <fieldset
+        name="itopen_update_server"
+        label="ITOPEN_UPDATE_SERVER"
+        description="ITOPEN_UPDATE_SERVER_DESC"
+        >
+           <field
+                    name="itopen_update_server_key"
+                    type="text"
+                    class="inputbox"
+                    label="ITOPEN_UPDATE_SERVER_KEY"
+                    description="ITOPEN_UPDATE_SERVER_KEY_DESC"
+                    default=""
+                    >
+            </field>
+    </fieldset>
+
 </config>

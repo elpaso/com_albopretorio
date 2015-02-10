@@ -3,19 +3,19 @@
 *
 * @package      COM_ALBOPRETORIO
 * @copyright    Copyright (C) 2014 Alessandro Pasotti http://www.itopen.it All rights reserved.
-* @license      GNU/AGPL
+* @license      GNU/GPL
 
     This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as
+    it under the terms of the GNU General Public License as
     published by the Free Software Foundation, either version 3 of the
     License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Affero General Public License for more details.
+    GNU General Public License for more details.
 
-    You should have received a copy of the GNU Affero General Public License
+    You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
@@ -50,9 +50,6 @@ class com_AlbopretorioInstallerScript
             $installer = new JInstaller();
 
             // Install plugins
-            #require '/home/ale/.composer/vendor/autoload.php';
-            #\Psy\Shell::debug(get_defined_vars());
-
             if($manifest->plugins){
                 foreach($manifest->plugins->plugin as $plugin) {
                     $attributes = $plugin->attributes();
@@ -61,7 +58,6 @@ class com_AlbopretorioInstallerScript
                     echo "Plugin " . $attributes['plugin'] . " successfully installed!";
                 }
             }
-
             // Install modules
             if($manifest->modules){
                 foreach($manifest->modules->module as $module) {
@@ -172,4 +168,19 @@ class com_AlbopretorioInstallerScript
 
         }
 
+        /**
+        * Method to run after an install/update/uninstall method
+        * $parent is the class calling this method
+        * $type is the type of change (install, update or discover_install)
+        *
+        * @return void
+        */
+        function postflight($type, $parent)
+        {
+            echo <<<_HTML_
+            <h1>Aggiornamenti automatici</h1>
+            <p>Questo componente utilizza il sistema di aggiornamenti automatici fornito da Joomla!.</p>
+            <p>Se hai acquistato il servizio di assistenza, devi inserire la chiave di attivazione nella configurazione del componente, normalmente si tratta dell'ID della transazione PayPal con la quale hai effettuato il pagamento. Se usi la versione gratuita puoi lasciare il campo vuoto.</p>
+_HTML_;
+        }
 }

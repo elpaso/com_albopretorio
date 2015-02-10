@@ -3,7 +3,7 @@
 * @version		$Id:$
 * @package		plgSystemAlbopretorio
 * @copyright	Copyright (C) 2015 ItOpen. All rights reserved.
-* @licence      GNU/AGPL
+* @licence      GNU/GPL
 *
 * @description
 *
@@ -18,6 +18,19 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 jimport( 'joomla.plugin.plugin' );
 
+
+// Check if component is installed
+if (! file_exists(JPATH_ADMINISTRATOR . '/components/com_albopretorio/albopretorio.php'))
+{
+    return;
+}
+
+// Check if is not enabled..
+if (!JComponentHelper::getComponent('com_albopretorio', true)->enabled)
+{
+    return;
+}
+
 /**
  * Joomla! Albopretorio  plugin
  *
@@ -31,6 +44,16 @@ class plgSystemAlbopretorio extends JPlugin
     function __construct( $subject, $config)
     {
         parent::__construct($subject, $config);
+        // Check if component is installed
+        if (! file_exists(JPATH_ADMINISTRATOR . '/components/com_albopretorio/albopretorio.php'))
+        {
+            return;
+        }
+        // Check if is not enabled..
+        if (! JComponentHelper::getComponent('com_albopretorio', true)->enabled)
+        {
+            return;
+        }
         $this->loadLanguage('com_albopretorio', JPATH_ADMINISTRATOR . '/components/com_albopretorio/');
         $this->_component = JComponentHelper::getComponent('com_albopretorio');
     }

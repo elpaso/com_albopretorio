@@ -2,20 +2,20 @@
 /**
 *
 * @package      COM_ALBOPRETORIO
-* @copyright    Copyright (C) 2014 Alessandro Pasotti http://www.itopen.it All rights reserved.
-* @license      GNU/AGPL
+* @copyright    Copyright (C) 2014-2015 Alessandro Pasotti http://www.itopen.it All rights reserved.
+* @license      GNU/GPL
 
     This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as
+    it under the terms of the GNU General Public License as
     published by the Free Software Foundation, either version 3 of the
     License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Affero General Public License for more details.
+    GNU General Public License for more details.
 
-    You should have received a copy of the GNU Affero General Public License
+    You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
@@ -209,6 +209,7 @@ class AlbopretorioModelAlbopretorio extends JModelList
 					' a.published, a.access, a.ordering, a.language, a.publish_up, a.publish_down, a.created_by'
 			)
 		);
+
         /*/ Add files
         for($i = 0; $i < 12; $i++){
             $query->select('filename'.$i);
@@ -372,7 +373,7 @@ class AlbopretorioModelAlbopretorio extends JModelList
 			$orderCol = 'c.title ' . $orderDirn . ', a.ordering';
 		}
 
-        if ( $orderCol == 'a.official_number' && JComponentHelper::getParams('com_albopretorio')->get('autoincrement_sort_numerically') == '1' ) {
+        if ( $orderCol == 'a.official_number' && JComponentHelper::getParams('com_albopretorio')->get('autoincrement_sort_numerically') != '0' ) {
             $orderCol = " CAST(official_number as SIGNED INTEGER) ";
         }
 
