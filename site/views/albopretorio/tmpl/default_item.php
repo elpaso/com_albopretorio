@@ -28,11 +28,13 @@ $this->loadHelper('route');
 ?>
 <tr>
     <td><a class="hasTooltip" title="<?php echo JText::_('COM_ALBOPRETORIO_DOCUMENT_DETAILS'); ?>" href="<?php echo AlbopretorioHelperRoute::getAffissioneRoute($this->item->slug, $this->item->catid) ?>"><i class="icon icon-stack"></i> <?php echo $this->item->name; ?></a></td>
-    <td><?php echo $this->item->document_number; ?></td>
-    <td><?php echo $this->item->official_number; ?></td>
-    <td><?php echo JHTML::_('date', $this->item->document_date, JText::_('DATE_FORMAT_LC3')); ?></td>
-    <td><?php echo JHTML::_('date', $this->item->publish_up, JText::_('DATE_FORMAT_LC3')); ?></td>
-    <td><?php echo JHTML::_('date', $this->item->publish_down, JText::_('DATE_FORMAT_LC3')); ?></td>
+    <td class="hidden-phone"><?php echo $this->item->document_number; ?></td>
+    <td class="hidden-phone"><?php echo $this->item->official_number; ?></td>
+    <?php if ( $this->params->get('show_document_date', true) ): ?>
+    <td class="hidden-phone"><?php echo JHTML::_('date', $this->item->document_date, JText::_('DATE_FORMAT_LC3')); ?></td>
+    <?php endif; ?>
+    <td class="hidden-phone"><?php echo JHTML::_('date', $this->item->publish_up, JText::_('DATE_FORMAT_LC3')); ?></td>
+    <td class="hidden-phone"><?php echo JHTML::_('date', $this->item->publish_down, JText::_('DATE_FORMAT_LC3')); ?></td>
     <td><?php
         $category = JCategories::getInstance('Albopretorio')->get($this->item->catid);
         echo AlbopretorioHelper::getCategoryPath($category);

@@ -10,14 +10,22 @@
     <!-- Add fields to the parameters object for the layout. -->
     <fields name="params">
         <fieldset name="basic" label="COM_ALBOPRETORIO_VIEW_BASIC_OPTIONS">
-
-                <field name="description" type="editor" buttons="true" hide="pagebreak,readmore"
-                    description="COM_ALBOPRETORIO_VIEW_DESCRIPTION_DESC"
-                    label="COM_ALBOPRETORIO_VIEW_DESCRIPTION_LABEL"
-                >
-                </field>
-
+            <field
+                id="show_document_date"
+                name="show_document_date"
+                type="radio"
+                class="btn-group btn-group-yesno"
+                default="1"
+                label="COM_ALBOPRETORIO_FIELD_SHOW_DOCUMENT_DATE_LABEL"
+                description="COM_ALBOPRETORIO_FIELD_SHOW_DOCUMENT_DATE_DESC">
+                <option value="1">JSHOW</option>
+                <option value="0">JHIDE</option>
+            </field>
+            <field name="description" type="editor" buttons="true" hide="pagebreak,readmore"
+                description="COM_ALBOPRETORIO_VIEW_DESCRIPTION_DESC"
+                label="COM_ALBOPRETORIO_VIEW_DESCRIPTION_LABEL"
+            >
+            </field>
         </fieldset>
     </fields>
-
 </metadata>

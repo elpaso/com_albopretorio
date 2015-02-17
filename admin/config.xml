@@ -109,6 +109,18 @@
 			<option value="0">JHIDE</option>
 		</field>
 
+        <field
+            id="show_document_date"
+            name="show_document_date"
+            type="radio"
+            class="btn-group btn-group-yesno"
+            default="1"
+            label="COM_ALBOPRETORIO_FIELD_SHOW_DOCUMENT_DATE_LABEL"
+            description="COM_ALBOPRETORIO_FIELD_SHOW_DOCUMENT_DATE_DESC">
+            <option value="1">JSHOW</option>
+            <option value="0">JHIDE</option>
+        </field>
+
 		<field
 			name="show_description_image"
 			type="radio"

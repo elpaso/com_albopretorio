@@ -27,6 +27,13 @@ JHtml::_ ( 'behavior.multiselect' );
 JHtml::_ ( 'formbehavior.chosen', 'select' );
 
 $app = JFactory::getApplication ();
+$document = $app->getDocument();
+$document->addStyleDeclaration(<<<__CSS__
+    table.albopretorio th.albopretorio-w10 {
+        width: 10%;
+    }
+__CSS__
+);
 $user = JFactory::getUser ();
 $userId = $user->get ( 'id' );
 $listOrder = $this->escape ( $this->state->get ( 'list.ordering' ) );
@@ -69,10 +76,10 @@ $assoc = JLanguageAssociations::isEnabled ();
 				for="filter-search">
 					<?php echo JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL').'&#160;'; ?>
 				</label> <input type="text" name="filter_search" id="filter-search"
-				value="<?php echo $this->escape($this->state->get('filter.search')); ?>"
+				value="<?php echo $this->escape($this->state->get('filter.search', JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL'))); ?>"
 				class="inputbox" onchange="document.adminForm.submit();"
 				title="<?php echo JText::_('COM_ALBOPRETORIO_FILTER_SEARCH_DESC'); ?>"
-				placeholder="<?php echo JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL'); ?>" />
+				onfocus="if (this.value=='<?php echo $this->escape(JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL')); ?>') this.value='';" onblur="if (this.value=='') this.value='<?php echo  $this->escape(JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL')); ?>';"/>
 				<button class="btn btn-primary" type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
 				<?php if($this->state->get('filter.search')): ?>
 				<a class="btn btn-primary" href="javascript:jQuery('#filter-search').val('');jQuery('#adminForm').submit();"><?php echo JText::_('COM_ALBOPRETORIO_FILTER_SEARCH_CLEAR'); ?></a>
@@ -94,54 +101,59 @@ $assoc = JLanguageAssociations::isEnabled ();
 		} ?>
 		</div>
 	</fieldset>
-
-	<table class="table table-striped table-bordered table-hover albopretorio"
-		id="articleList">
-		<thead>
-			<tr>
-				<th class="title">
-                    <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_NAME', 'a.name', $listDirn, $listOrder); ?>
-                </th>
-				<th width="10%" class="hidden-phone">
-                    <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_DOCUMENT_NUMBER', 'a.document_number', $listDirn, $listOrder); ?>
-                </th>
-				<th width="10%" class="hidden-phone">
-                    <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_OFFICIAL_NUMBER', 'a.official_number', $listDirn, $listOrder); ?>
-                </th>
-				<th width="10%" class="hidden-phone">
-                    <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_DOCUMENT_DATE', 'a.document_date', $listDirn, $listOrder); ?>
-                </th>
-				<th width="10%" class="hidden-phone">
-                    <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_PUBLISH_DATE', 'a.publish_up', $listDirn, $listOrder); ?>
-                </th>
-				<th width="10%" class="hidden-phone">
-                    <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_SUSPEND_DATE', 'a.publish_down', $listDirn, $listOrder); ?>
-                </th>
-				<th class="hidden-phone">
-                    <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_CATEGORY', 'a.category_title', $listDirn, $listOrder); ?>
-                </th>
-			</tr>
-		</thead>
-		<tfoot>
-			<tr>
-				<td colspan="11"><div class="pagination bottom">
-    			<?php echo $this->pagination->getResultsCounter(); ?>
-				<?php echo $this->pagination->getListFooter(); ?>
-				</td>
-			</tr>
-		</tfoot>
-		<tbody>
-            <?php
-			foreach ( $this->items as $item ) {
-				$this->item = $item;
-				echo $this->loadTemplate ( 'item' );
-			}
-			?>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover albopretorio"
+            id="articleList">
+            <thead>
+                <tr>
+                    <th class="title">
+                        <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_NAME', 'a.name', $listDirn, $listOrder); ?>
+                    </th>
+                    <th class="albopretorio-w10 hidden-phone">
+                        <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_DOCUMENT_NUMBER', 'a.document_number', $listDirn, $listOrder); ?>
+                    </th>
+                    <th class="albopretorio-w10 hidden-phone">
+                        <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_OFFICIAL_NUMBER', 'a.official_number', $listDirn, $listOrder); ?>
+                    </th>
+                    <?php if ( $this->params->get('show_document_date', true) ): ?>
+                    <th class="albopretorio-w10 hidden-phone">
+                        <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_DOCUMENT_DATE', 'a.document_date', $listDirn, $listOrder); ?>
+                    </th>
+                    <?php endif; ?>
+                    <th class="albopretorio-w10 hidden-phone">
+                        <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_PUBLISH_DATE', 'a.publish_up', $listDirn, $listOrder); ?>
+                    </th>
+                    <th class="albopretorio-w10 hidden-phone">
+                        <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_SUSPEND_DATE', 'a.publish_down', $listDirn, $listOrder); ?>
+                    </th>
+                    <th>
+                        <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_CATEGORY', 'a.category_title', $listDirn, $listOrder); ?>
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="11">
+                        <div class="pagination bottom">
+                            <?php echo $this->pagination->getResultsCounter(); ?>
+                            <?php echo $this->pagination->getListFooter(); ?>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <?php
+                foreach ( $this->items as $item ) {
+                    $this->item = $item;
+                    echo $this->loadTemplate ( 'item' );
+                }
+                ?>
             </tbody>
-	</table>
-	<input type="hidden" name="task" value="" /> <input type="hidden"
-		name="boxchecked" value="0" /> <input type="hidden"
-		name="filter_order" value="<?php echo $listOrder; ?>" /> <input
-		type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
-		<?php echo JHtml::_('form.token'); ?>
+        </table>
+        <input type="hidden" name="task" value="" /> <input type="hidden"
+            name="boxchecked" value="0" /> <input type="hidden"
+            name="filter_order" value="<?php echo $listOrder; ?>" /> <input
+            type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
+        <?php echo JHtml::_('form.token'); ?>
+    </div>
 </form>
