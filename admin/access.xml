@@ -9,7 +9,9 @@
 		<action name="core.edit.state" title="JACTION_EDITSTATE" description="JACTION_EDITSTATE_COMPONENT_DESC" />
 		<action name="core.edit.own" title="JACTION_EDITOWN" description="JACTION_EDITOWN_COMPONENT_DESC" />
 
-        <!-- no way to handle this without a plugin ! -->
+        <action name="albopretorio.dates_no_check" title="COM_ALBOPRETORIO_ACCESS_DATE_NO_CHECK" description="COM_ALBOPRETORIO_ACCESS_DATE_NO_CHECK_DESC" />
+
+        <!-- no way to handle this without a plugin ! See system/albopretorio -->
         <action name="category.create" title="COM_ALBOPRETORIO_ACTION_CATEGORY_CREATE" description="COM_ALBOPRETORIO_ACCESS_CATEGORY_CREATE_DESC" />
 
     </section>

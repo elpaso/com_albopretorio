@@ -2,7 +2,7 @@
 /**
 *
 * @package      COM_ALBOPRETORIO
-* @copyright    Copyright (C) 2014 Alessandro Pasotti http://www.itopen.it All rights reserved.
+* @copyright    Copyright (C) 2014-2015 Alessandro Pasotti http://www.itopen.it All rights reserved.
 * @license      GNU/GPL
 
     This program is free software: you can redistribute it and/or modify
@@ -266,6 +266,7 @@ class AlbopretorioModelAffissione extends JModelAdmin {
 		if (! $data ){
             $data = (object) $form->getData()->toObject( ) ;
         }
+
 		if ( ! $this->canEditState ( ( object ) $data )) {
 
             // Disable fields for display.
@@ -278,7 +279,11 @@ class AlbopretorioModelAffissione extends JModelAdmin {
             $form->setFieldAttribute ( 'published', 'filter', 'unset' );
 
             // Only disable fields if it's an existing record
-            if  ($data->id) {
+
+            if ( !is_object( $data ) ) {
+                $data = ( object ) $data;
+            }
+            if  ( $data->id) {
                 $form->setFieldAttribute ( 'publish_up', 'disabled', 'true' );
                 $form->setFieldAttribute ( 'publish_down', 'disabled', 'true' );
 
