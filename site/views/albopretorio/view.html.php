@@ -91,6 +91,11 @@ class AlbopretorioViewAlbopretorio extends JViewLegacy
 		// Get the current menu item
 		$params = $app->getParams();
 
+		// Additional CSS
+		if ( $params->get('custom_css', false) ){
+            $app->getDocument()->addStyleDeclaration($params->get('custom_css'));
+        }
+
 		// Check for errors.
 		// @TODO: Maybe this could go into JComponentHelper::raiseErrors($this->get('Errors'))
 		if (count($errors = $this->get('Errors')))
@@ -128,9 +133,10 @@ class AlbopretorioViewAlbopretorio extends JViewLegacy
 		return array(
 			'a.ordering' => JText::_('JGRID_HEADING_ORDERING'),
 			'a.published' => JText::_('JSTATUS'),
-			'a.document_number' => JText::_('JSTATUS'),
-			'a.official_number' => JText::_('JSTATUS'),
-			'a.name' => JText::_('JGLOBAL_TITLE'),
+			'a.document_number' => JText::_('COM_ALBOPRETORIO_FIELD_DOCUMENT_NUMBER_LABEL'),
+			'a.official_number' => JText::_('COM_ALBOPRETORIO_FIELD_OFFICIAL_NUMBER_LABEL'),
+            'a.document_date' => JText::_('COM_ALBOPRETORIO_FIELD_DOCUMENT_DATE_LABEL'),
+			'a.name' => JText::_('COM_ALBOPRETORIO_FIELD_NAME_LABEL'),
 			'category_title' => JText::_('JCATEGORY'),
 			'a.access' => JText::_('JGRID_HEADING_ACCESS'),
 			'a.language' => JText::_('JGRID_HEADING_LANGUAGE'),

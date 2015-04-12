@@ -181,6 +181,49 @@ class com_AlbopretorioInstallerScript
             <h1>Aggiornamenti automatici</h1>
             <p>Questo componente utilizza il sistema di aggiornamenti automatici fornito da Joomla!.</p>
             <p>Se hai acquistato il servizio di assistenza, devi inserire la chiave di attivazione nella configurazione del componente, normalmente si tratta dell'ID della transazione PayPal con la quale hai effettuato il pagamento. Se usi la versione gratuita puoi lasciare il campo vuoto.</p>
+            <h2>Novità della versione 1.13</h2>
+            <p>Sistemato un difetto: <a target="_blank" href="http://www.itopen.it/mantis/view.php?id=1468">#1468</a>
+            <p>Aggiunte opzioni per l'ordinamento dell'elenco atti: ora è possibile decidere il campo di ordinamento predefinito.</p>
+            <p>Eliminato il placeholder nel campo di ricerca: iterferisce con l'ordinamento e non è possibile utilizzare l'attributo "placeholder" in quanto non è compatibile con le norme sull'accessibiltà</p>
+            <h2>Novità della versione 1.12</h2>
+            <p>Sistemati due piccoli difetti: <a target="_blank" href="http://www.itopen.it/mantis/view.php?id=1464">#1464</a> e <a target="_blank" href="http://www.itopen.it/mantis/view.php?id=1463">#1463</a></p>
+            <h2>Novità della versione 1.11</h2>
+            <p>Nelle opzioni di configurazione del componente è ora possibile inserire delle regole CSS custom che permettono di migliorare la visualizzazione in alcuni template diversi dal template accessibile e da protostar (dove sono già presenti). Per esempio potresti copiare e incollare le regole seguenti:</p>
+            <pre>
+.clearfix {
+    clear: both;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content:"";
+    display:table;
+    clear: both;
+}
+
+dl.albopretorio {
+ width:100%;
+ overflow:hidden;
+}
+
+dl.albopretorio dt {
+ float:left;
+ width:40%; /* adjust the width; make sure the total of both is 100% */
+ font-weight:bold;
+ text-align: right;
+ padding-right: 3%;
+}
+
+dl.albopretorio dd {
+ width:57%; /* adjust the width; make sure the total of both is 100% */
+}
+
+table.albopretorio {
+    width: 100%;
+}
+
+</pre>
+
 _HTML_;
         }
 }

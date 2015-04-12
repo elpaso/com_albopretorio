@@ -29,16 +29,33 @@
 			<option value="0">JHIDE</option>
 		</field>
 
+
 		<field
-			id="albopretorio_display_order"
-			name="albopretorio_display_order"
+			id="albopretorio_order_dir"
+			name="albopretorio_order_dir"
 			type="list"
-			label="COM_ALBOPRETORIO_FIELD_ALBOPRETORIO_DISPLAY_ORDER_LABEL"
-			description="COM_ALBOPRETORIO_FIELD_ALBOPRETORIO_DISPLAY_ORDER_DESC"
+			label="COM_ALBOPRETORIO_FIELD_ALBOPRETORIO_ORDER_DIR_LABEL"
+			description="COM_ALBOPRETORIO_FIELD_ALBOPRETORIO_ORDER_DIR_DESC"
 		>
-			<option value="des">JGLOBAL_MOST_RECENT_FIRST</option>
-			<option value="asc">JGLOBAL_OLDEST_FIRST</option>
+			<option value="desc">COM_ALBOPRETORIO_ORDER_DESC</option>
+			<option value="asc">COM_ALBOPRETORIO_ORDER_ASC</option>
 		</field>
+
+		<field
+			id="albopretorio_order_field"
+			name="albopretorio_order_field"
+			type="list"
+			label="COM_ALBOPRETORIO_FIELD_ALBOPRETORIO_ORDER_FIELD_LABEL"
+			description="COM_ALBOPRETORIO_FIELD_ALBOPRETORIO_ORDER_FIELD_DESC"
+		>
+			<option value="a.document_number">COM_ALBOPRETORIO_FIELD_DOCUMENT_NUMBER_LABEL</option>
+			<option value="a.document_date">COM_ALBOPRETORIO_FIELD_DOCUMENT_DATE_LABEL</option>
+			<option value="a.official_number">COM_ALBOPRETORIO_FIELD_OFFICIAL_NUMBER_LABEL</option>
+			<option value="a.document_name">COM_ALBOPRETORIO_FIELD_NAME_LABEL</option>
+			<option value="a.publish_up">COM_ALBOPRETORIO_HEADING_PUBLISH_DATE</option>
+			<option value="a.publish_down">COM_ALBOPRETORIO_HEADING_SUSPEND_DATE</option>
+		</field>
+
 
 		<!--field
 			name="float_first"
@@ -392,19 +409,30 @@
         </field>
     </fieldset>
     <fieldset
+        name="style"
+        label="COM_ALBOPRETORIO_STYLE_LABEL"
+        description="COM_ALBOPRETORIO_STYLE_DESC"
+        >
+        <field name="custom_css" type="textarea"
+            default=""
+            rows="10" cols="5"
+            label="COM_ALBOPRETORIO_ADDITIONAL_CSS"
+            description="COM_ALBOPRETORIO_ADDITIONAL_CSS_DESC">
+        </field>
+    </fieldset>
+    <fieldset
         name="itopen_update_server"
         label="ITOPEN_UPDATE_SERVER"
         description="ITOPEN_UPDATE_SERVER_DESC"
         >
-           <field
-                    name="itopen_update_server_key"
-                    type="text"
-                    class="inputbox"
-                    label="ITOPEN_UPDATE_SERVER_KEY"
-                    description="ITOPEN_UPDATE_SERVER_KEY_DESC"
-                    default=""
-                    >
-            </field>
+        <field
+            name="itopen_update_server_key"
+            type="text"
+            class="inputbox"
+            label="ITOPEN_UPDATE_SERVER_KEY"
+            description="ITOPEN_UPDATE_SERVER_KEY_DESC"
+            default=""
+            >
+        </field>
     </fieldset>
-
 </config>

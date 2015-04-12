@@ -2,7 +2,7 @@
 /**
 *
 * @package      COM_ALBOPRETORIO
-* @copyright    Copyright (C) 2014 Alessandro Pasotti http://www.itopen.it All rights reserved.
+* @copyright    Copyright (C) 2007-2015 Alessandro Pasotti http://www.itopen.it All rights reserved.
 * @license      GNU/GPL
 
     This program is free software: you can redistribute it and/or modify
@@ -203,7 +203,7 @@ $assoc		= JLanguageAssociations::isEnabled();
 							?>
 						</div>
 					</td>
-					<td class="nowrap has-context">
+					<td class="has-context">
 						<div class="pull-left">
 							<?php if ($item->checked_out) : ?>
 								<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'albopretorio.', $canCheckin); ?>

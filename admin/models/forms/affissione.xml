@@ -125,7 +125,7 @@
 			filter="user_utc"
              />
 
-        <field name="hide" type="radio" default="0"
+        <field name="hide" type="radio" default="1"
 			label="COM_ALBOPRETORIO_FIELD_HIDE_LABEL"
 			description="COM_ALBOPRETORIO_FIELD_HIDE_DESC"
 			class="btn-group btn-group-yesno">

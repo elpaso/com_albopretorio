@@ -151,10 +151,11 @@ class AlbopretorioModelAlbopretorio extends JModelList
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_albopretorio');
 		$this->setState('params', $params);
+        #vardie($params);
 
 
 		// List state information.
-		parent::populateState('a.name', 'asc');
+		parent::populateState( $params->get('albopretorio_order_field', 'a.document_date'), $params->get('albopretorio_order_dir', 'asc'));
 	}
 
 	/**
@@ -377,12 +378,16 @@ class AlbopretorioModelAlbopretorio extends JModelList
             $orderCol = " CAST(official_number as SIGNED INTEGER) ";
         }
 
+        if ( $orderCol == 'a.document_number' && JComponentHelper::getParams('com_albopretorio')->get('autoincrement_sort_numerically') != '0' ) {
+            $orderCol = " CAST(document_number as SIGNED INTEGER) ";
+        }
+
         if($orderCol && $orderDirn){
             $query->order($db->escape($orderCol . ' ' . $orderDirn));
 
         }
 
-		//echo nl2br(str_replace('#__','jos_',$query));
+		#echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
 	}
 

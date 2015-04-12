@@ -140,6 +140,11 @@ class AlbopretorioViewAffissione extends JViewLegacy
 		$title		= null;
 		// Get the current menu item
 		$params = $app->getParams();
+		
+        // Additional CSS
+        if ( $params->get('custom_css', false) ){
+            $app->getDocument()->addStyleDeclaration($params->get('custom_css'));
+        }
 
 		// Check the access to the affissione
 		$levels = $user->getAuthorisedViewLevels();

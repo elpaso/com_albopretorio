@@ -76,10 +76,10 @@ $assoc = JLanguageAssociations::isEnabled ();
 				for="filter-search">
 					<?php echo JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL').'&#160;'; ?>
 				</label> <input type="text" name="filter_search" id="filter-search"
-				value="<?php echo $this->escape($this->state->get('filter.search', JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL'))); ?>"
+				value="<?php /* echo $this->escape($this->state->get('filter.search', JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL'))); */ ?>"
 				class="inputbox" onchange="document.adminForm.submit();"
 				title="<?php echo JText::_('COM_ALBOPRETORIO_FILTER_SEARCH_DESC'); ?>"
-				onfocus="if (this.value=='<?php echo $this->escape(JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL')); ?>') this.value='';" onblur="if (this.value=='') this.value='<?php echo  $this->escape(JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL')); ?>';"/>
+				<?php /*onfocus="if (this.value=='<?php echo $this->escape(JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL')); ?>') this.value='';" onblur="if (this.value=='') this.value='<?php echo  $this->escape(JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL')); ?>';" */ ?> />
 				<button class="btn btn-primary" type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
 				<?php if($this->state->get('filter.search')): ?>
 				<a class="btn btn-primary" href="javascript:jQuery('#filter-search').val('');jQuery('#adminForm').submit();"><?php echo JText::_('COM_ALBOPRETORIO_FILTER_SEARCH_CLEAR'); ?></a>
@@ -127,7 +127,7 @@ $assoc = JLanguageAssociations::isEnabled ();
                         <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_SUSPEND_DATE', 'a.publish_down', $listDirn, $listOrder); ?>
                     </th>
                     <th>
-                        <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_CATEGORY', 'a.category_title', $listDirn, $listOrder); ?>
+                        <?php echo JHtml::_('grid.sort', 'COM_ALBOPRETORIO_HEADING_CATEGORY', 'category_title', $listDirn, $listOrder); ?>
                     </th>
                 </tr>
             </thead>
