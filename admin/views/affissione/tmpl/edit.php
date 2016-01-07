@@ -97,7 +97,6 @@ $assoc = JLanguageAssociations::isEnabled();
 
         // Official field set
 
-        // Autoincrement?
         jimport('joomla.application.component.helper');
 
         $fields = array('document_date', 'document_number');
@@ -109,6 +108,7 @@ $assoc = JLanguageAssociations::isEnabled();
             $html[] = $field->renderField();
         }
 
+        // Autoincrement?
         $autoincrement_official_number = JComponentHelper::getParams('com_albopretorio')->get('autoincrement_official_number');
         if ( $autoincrement_official_number == '1'){
             $this->form->setFieldAttribute('official_number', 'readonly', 'true');
@@ -154,9 +154,8 @@ $assoc = JLanguageAssociations::isEnabled();
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
 
-		<?php $this->set('ignore_fieldsets', array('jbasic')); ?>
+		<?php $this->set('ignore_fieldsets', array('jbasic', 'options', 'publication', 'attachments', 'official')); ?>
 		<?php echo JLayoutHelper::render('joomla.edit.params', $this); ?>
-
 
 		<?php if ($assoc) : ?>
 			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'associations', JText::_('JGLOBAL_FIELDSET_ASSOCIATIONS', true)); ?>

@@ -23,6 +23,7 @@
 defined('_JEXEC') or die;
 
 $fieldSets = $this->form->getFieldsets('params');
+vardie($fieldSets);
 foreach ($fieldSets as $name => $fieldSet) :
 	?>
 	<div class="tab-pane" id="params-<?php echo $name;?>">

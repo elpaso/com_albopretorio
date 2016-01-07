@@ -388,7 +388,7 @@
             class="btn-group btn-group-yesno"
             default="0"
             label="COM_ALBOPRETORIO_AUTOINCREMENT_LABEL"
-            description="OM_ALBOPRETORIO_AUTOINCREMENT_DESC"
+            description="COM_ALBOPRETORIO_AUTOINCREMENT_DESC"
             >
 
             <option value="0">JNO</option>

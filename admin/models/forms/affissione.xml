@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
-	<fieldset addfieldpath="/administrator/components/com_categories/models/fields" >
+	<fieldset name="jbasic" addfieldpath="/administrator/components/com_categories/models/fields" >
 		<field name="id" type="text" default="0"
 			readonly="true" class="readonly" label="JGLOBAL_FIELD_ID_LABEL"
 			description="JGLOBAL_FIELD_ID_DESC" />
@@ -71,10 +71,10 @@
 			filter="user_utc" />
 
 		<field name="created_by" type="user"
-			label="JGLOBAL_FIELD_Created_by_Label" description="JGLOBAL_FIELD_CREATED_BY_DESC" />
+			label="JGLOBAL_FIELD_CREATED_BY_LABEL" description="JGLOBAL_FIELD_CREATED_BY_DESC" />
 
 		<field name="created_by_alias" type="text"
-			label="JGLOBAL_FIELD_Created_by_alias_Label" description="JGLOBAL_FIELD_CREATED_BY_ALIAS_DESC"
+			label="JGLOBAL_FIELD_CREATED_BY_ALIAS_LABEL" description="JGLOBAL_FIELD_CREATED_BY_ALIAS_DESC"
 			size="20" />
 
 		<field name="modified" type="calendar" class="readonly"
@@ -213,7 +213,7 @@
     </fieldset>
 
 
-		<fields name="metadata" label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
+    <fields name="metadata" label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
 		<fieldset name="jmetadata" label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
 
 			<field name="robots"

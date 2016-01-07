@@ -2,12 +2,12 @@
 <extension version="3.1" type="plugin" group="system" method="upgrade">
     <name>Albo Pretorio</name>
     <author>Alessandro Pasotti - ItOpen</author>
-    <creationDate>2015-03-17</creationDate>
+    <creationDate>2016-01-07</creationDate>
     <copyright>Copyright (C) 2015 ItOpen. All rights reserved.</copyright>
     <license>http://www.gnu.org/licenses/gpl.txt GNU/GPL</license>
     <authorEmail>info@itopen.it</authorEmail>
     <authorUrl>www.itopen.org</authorUrl>
-    <version>1.13</version>
+    <version>1.17</version>
     <description></description>
     <files>
         <filename plugin="albopretorio">albopretorio.php</filename>

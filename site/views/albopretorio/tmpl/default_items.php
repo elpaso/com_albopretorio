@@ -76,7 +76,7 @@ $assoc = JLanguageAssociations::isEnabled ();
 				for="filter-search">
 					<?php echo JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL').'&#160;'; ?>
 				</label> <input type="text" name="filter_search" id="filter-search"
-				value="<?php /* echo $this->escape($this->state->get('filter.search', JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL'))); */ ?>"
+				value="<?php echo $this->escape($this->state->get('filter.search', JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL'))); ?>"
 				class="inputbox" onchange="document.adminForm.submit();"
 				title="<?php echo JText::_('COM_ALBOPRETORIO_FILTER_SEARCH_DESC'); ?>"
 				<?php /*onfocus="if (this.value=='<?php echo $this->escape(JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL')); ?>') this.value='';" onblur="if (this.value=='') this.value='<?php echo  $this->escape(JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL')); ?>';" */ ?> />

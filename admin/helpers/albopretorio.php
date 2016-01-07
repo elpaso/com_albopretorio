@@ -63,7 +63,7 @@ class AlbopretorioHelper extends JHelperContent
 
 	public static function getSignature(){
 		?>
-		<div>Albopretorio per Joomla! 3 &copy; <?php echo date('Y') ?> <a title="Sviluppo e assistenza Joomla! FAP e software open-source" target="_blank" href="http://www.itopen.it">Alessandro Pasotti &mdash; ItOpen</a></div>
+		<div class="ap-signature">Albopretorio per Joomla! 3 &copy; <?php echo date('Y') ?> <a title="Sviluppo e assistenza Joomla! FAP e software open-source" target="_blank" href="http://www.itopen.it">Alessandro Pasotti &mdash; ItOpen</a></div>
 		<?php
 	}
 

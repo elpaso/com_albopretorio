@@ -62,7 +62,7 @@ class AlbopretorioModelCategory extends AlbopretorioModelAlbopretorio
 		$document_date = $this->getUserStateFromRequest($this->context . '.filter.document_date', 'filter_document_date', '', 'date');
 		$this->setState('filter.document_date', $document_date);
 
-		$hide = $this->getUserStateFromRequest($this->context . '.filter.hide', 'filter_hide', '', 'date');
+		$hide = $this->getUserStateFromRequest($this->context . '.filter.hide', 'filter_hide', null, 'int');
 		$this->setState('filter.hide', $hide);
 
 		$document_number = $this->getUserStateFromRequest($this->context . '.filter.document_number', 'filter_document_number', '', 'string');
