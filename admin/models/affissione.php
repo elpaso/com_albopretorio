@@ -589,9 +589,9 @@ class AlbopretorioModelAffissione extends JModelAdmin {
                 // Autoincrement?
                 jimport('joomla.application.component.helper');
                 if (  JComponentHelper::getParams('com_albopretorio')->get('autoincrement_sort_numerically') != '0' ) {
-                    $db->setQuery ( "SELECT official_number FROM #__albopretorio WHERE YEAR(document_date) = YEAR(NOW()) ORDER BY CAST(official_number as SIGNED INTEGER) DESC LIMIT 1;" );
+                    $db->setQuery ( "SELECT official_number FROM #__albopretorio WHERE YEAR(publish_up) = YEAR(NOW()) ORDER BY CAST(official_number as SIGNED INTEGER) DESC LIMIT 1;" );
                 } else {
-                    $db->setQuery ( "SELECT official_number FROM #__albopretorio WHERE YEAR(document_date) = YEAR(NOW()) ORDER BY official_number DESC LIMIT 1;" );
+                    $db->setQuery ( "SELECT official_number FROM #__albopretorio WHERE YEAR(publish_up) = YEAR(NOW()) ORDER BY official_number DESC LIMIT 1;" );
                 }
                 $item->official_number = (int) $db->loadResult () + 1;
             } else {
