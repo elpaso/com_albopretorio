@@ -48,6 +48,12 @@ if ($saveOrder) {
 }
 $sortFields = $this->getSortFields ();
 $assoc = JLanguageAssociations::isEnabled ();
+
+$default_value = JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL');
+$value = $this->escape($this->state->get('filter.search', $default_value));
+if (!$value){
+    $value = $default_value;
+}
 ?>
 
 
@@ -67,6 +73,25 @@ $assoc = JLanguageAssociations::isEnabled ();
 		}
 		Joomla.tableOrdering(order, dirn, '');
 	}
+
+    // Submit form (clearing search placeholder first)
+    function apFormClearPlaceholder(){
+        var $inp = jQuery(document.adminForm).find('#filter-search');
+        if($inp.val() =='<?php echo $default_value ?>'){
+            $inp.val('');
+        }
+    }
+
+    jQuery(function(){
+        var $form = jQuery(document.adminForm);
+        $form.submit(function(e){
+            e.preventDefault();
+            var self = this;
+            apFormClearPlaceholder();
+            self.submit();
+        });
+    });
+
 </script>
 <form action="" method="post" name="adminForm" id="adminForm">
 	<fieldset class="filters btn-toolbar clearfix">
@@ -76,10 +101,12 @@ $assoc = JLanguageAssociations::isEnabled ();
 				for="filter-search">
 					<?php echo JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL').'&#160;'; ?>
 				</label> <input type="text" name="filter_search" id="filter-search"
-				value="<?php echo $this->escape($this->state->get('filter.search', JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL'))); ?>"
-				class="inputbox" onchange="document.adminForm.submit();"
-				title="<?php echo JText::_('COM_ALBOPRETORIO_FILTER_SEARCH_DESC'); ?>"
-				<?php /*onfocus="if (this.value=='<?php echo $this->escape(JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL')); ?>') this.value='';" onblur="if (this.value=='') this.value='<?php echo  $this->escape(JText::_('COM_ALBOPRETORIO_NAME_FILTER_LABEL')); ?>';" */ ?> />
+				value="<?php echo $value ?>"
+				class="inputbox<?php echo ($value == $default_value ? ' placeholder' : '') ?>"
+                onchange="apFormClearPlaceholder() && document.adminForm.submit();"
+                onfocus="if(this.value=='<?php echo $default_value ?>'){ jQuery(this).removeClass('placeholder'); this.value='';}"
+                onblur="if (this.value==''){ jQuery(this).addClass('placeholder'); this.value='<?php echo $default_value ?>';}"
+				title="<?php echo JText::_('COM_ALBOPRETORIO_FILTER_SEARCH_DESC'); ?>" />
 				<button class="btn btn-primary" type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
 				<?php if($this->state->get('filter.search')): ?>
 				<a class="btn btn-primary" href="javascript:jQuery('#filter-search').val('');jQuery('#adminForm').submit();"><?php echo JText::_('COM_ALBOPRETORIO_FILTER_SEARCH_CLEAR'); ?></a>
@@ -94,7 +121,7 @@ $assoc = JLanguageAssociations::isEnabled ();
 			<label for="limit" class="element-invisible">
 				<?php echo JText::_('COM_ALBOPRETORIO_DISPLAY_NUM'); ?>
 			</label>
-			<?php echo $this->pagination->getLimitBox(); ?>
+			<?php echo str_replace('onchange="this.form.submit()"', 'onchange="jQuery(this.form).submit()"', $this->pagination->getLimitBox()); ?>
 		</div>
 
 			<?php

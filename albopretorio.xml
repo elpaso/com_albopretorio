@@ -2,12 +2,12 @@
 <extension type="component" version="3.1" method="upgrade">
 	<name>com_albopretorio</name>
 	<author>Alessandro Pasotti - ItOpen</author>
-	<creationDate>2016-01-07</creationDate>
+	<creationDate>2016-02-24</creationDate>
 	<copyright>(C) 2014-2015 ItOpen. All rights reserved.	</copyright>
 	<license>GNU General Public License version 3 or later; see	LICENSE.txt</license>
 	<authorEmail>info@itopen.it</authorEmail>
 	<authorUrl>www.itopen.it</authorUrl>
-	<version>1.17</version>
+	<version>1.20</version>
 	<description>COM_ALBOPRETORIO_XML_DESCRIPTION</description>
 
     <updateservers>

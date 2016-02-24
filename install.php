@@ -181,6 +181,10 @@ class com_AlbopretorioInstallerScript
             <h1>Aggiornamenti automatici</h1>
             <p>Questo componente utilizza il sistema di aggiornamenti automatici fornito da Joomla!.</p>
             <p>Se hai acquistato il servizio di assistenza, devi inserire la chiave di attivazione nella configurazione del componente, normalmente si tratta dell'ID della transazione PayPal con la quale hai effettuato il pagamento. Se usi la versione gratuita puoi lasciare il campo vuoto.</p>
+            <h2>Novità della versione 1.19</h2>
+            <p>Bug fix: ordinamento e paginazione viste elenco degli atti</p>
+            <h2>Novità della versione 1.18</h2>
+            <p>Bug fix: incremento automatico del numero in albo, riparte da 1 per i documenti pubblicati nell'anno successivo</p>
             <h2>Novità della versione 1.16</h2>
             <p>Bug fix: diritto all'oblio ignorato nelle viste archivio</p>
             <h2>Novità della versione 1.14</h2>
